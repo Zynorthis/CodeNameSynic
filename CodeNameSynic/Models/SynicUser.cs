@@ -14,9 +14,9 @@ namespace CodeNameSynic.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        [ForeignKey("Rating")]
-        [Display(Name = "RatingKey")]
-        public int RatingRefId { get; set; }
-        public Rating Rating { get; set; }
+        [ForeignKey("ApplicationUser")]
+        [Display(Name = "User Id")]
+        public string ApplicationUserRefId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
     }
 }

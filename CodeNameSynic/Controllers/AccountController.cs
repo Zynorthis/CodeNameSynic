@@ -160,8 +160,9 @@ namespace CodeNameSynic.Controllers
                 SynicUser userTableData = new SynicUser();
                 userTableData.FirstName = model.FirstName;
                 userTableData.LastName = model.LastName;
+                userTableData.ApplicationUserRefId = user.Id;
                 
-                db.SynicUser.Add(userTableData);
+                db.SynicUsers.Add(userTableData);
                 db.SaveChanges();
                 
                 if (result.Succeeded)
@@ -174,6 +175,7 @@ namespace CodeNameSynic.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
                     await this.UserManager.AddToRoleAsync(user.Id, model.Role);
+                    
                     return RedirectToAction("Index", "Home");
                 }
                 ViewBag.Roles = new SelectList(db.Roles.ToList());

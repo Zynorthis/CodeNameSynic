@@ -22,7 +22,7 @@ namespace CodeNameSynic.Models
     {
         public DbSet<Category> Categories { get; set; }
         public DbSet<Event> Events { get; set; }
-        public DbSet<SynicUser> SynicUser { get; set; }
+        public DbSet<SynicUser> SynicUsers { get; set; }
         public DbSet<Rating> Ratings { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
