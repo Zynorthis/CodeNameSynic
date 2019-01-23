@@ -3,42 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using CodeNameSynic.Models;
 
 namespace CodeNameSynic.Controllers
 {
-    public class RegularController : Controller
+    public class ReviewController : Controller
     {
-        ApplicationDbContext db = new ApplicationDbContext();
-        // GET: Regular
-        public ActionResult Index(SynicUser user)
+        // GET: Review
+        public ActionResult Index()
         {
-            //List<Event> recommendedEvents = new List<Event>();
-            //foreach(var category in user.UserPreferences.FollowedCategories)
-            //{
-            //    List<Event> popularEvents = eventQuery(category.ID);
-            //    foreach(var item in popularEvents)
-            //    {
-            //        recommendedEvents.Add(item);
-            //    }
-            //}
-            //return View(recommendedEvents);
             return View();
         }
 
-        // GET: Regular/Details/5
+        // GET: Review/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Regular/Create
+        // GET: Review/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Regular/Create
+        // POST: Review/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -54,13 +42,13 @@ namespace CodeNameSynic.Controllers
             }
         }
 
-        // GET: Regular/Edit/5
+        // GET: Review/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Regular/Edit/5
+        // POST: Review/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -76,13 +64,13 @@ namespace CodeNameSynic.Controllers
             }
         }
 
-        // GET: Regular/Delete/5
+        // GET: Review/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Regular/Delete/5
+        // POST: Review/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
@@ -98,19 +86,10 @@ namespace CodeNameSynic.Controllers
             }
         }
 
-        public ActionResult Category(string category)
+        public ActionResult List()
         {
-            Category selectedCategory = db.Categories.Where(c => c.Title == category).SingleOrDefault();
-            List<Event> EventList = db.Events.Where(e => e.CategoryRefId == selectedCategory.ID).ToList();
-            ViewBag.EventList = new SelectList(EventList);
 
-            return View(selectedCategory);
+            return View();
         }
-
-        //private List<Event> eventQuery(int ID)
-        //{
-        //    var eventQuery = db.Events.Where(e => e.Category.ID == ID).ToList();
-        //    return eventQuery;
-        //}
     }
 }

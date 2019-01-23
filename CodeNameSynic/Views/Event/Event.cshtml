@@ -1,0 +1,66 @@
+﻿@model CodeNameSynic.Models.Event
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<center>
+    <div class="jumbotron">
+        <h2> @Model.Title </h2>
+        <hr />
+        <h4> @Model.Description </h4>
+        <br />
+        <div class="right">
+            <h4>
+                @Model.TotalRating |
+                @Html.ActionLink("See Reviews Here", "Review", "Review", "", new { @class = "btn btn-default" })
+            </h4>
+        </div>
+    </div>
+</center>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndTime)
+        </dd>
+
+    </dl>
+
+    <!-- Display Map Here -->
+    <div id="map"></div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
