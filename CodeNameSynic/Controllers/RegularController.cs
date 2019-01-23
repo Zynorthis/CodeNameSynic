@@ -23,7 +23,10 @@ namespace CodeNameSynic.Controllers
             //    }
             //}
             //return View(recommendedEvents);
-            return View();
+
+            UserAndEventsModel model = new UserAndEventsModel();
+            model.User = user;
+            return View(model);
         }
 
         // GET: Regular/Details/5

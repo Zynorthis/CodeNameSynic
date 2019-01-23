@@ -21,7 +21,7 @@ namespace CodeNameSynic.Models
 
         [ForeignKey("UserPreferences")]
         [Display(Name = "Preferences")]
-        public int UserPreferencesRefId { get; set; }
+        public int? UserPreferencesRefId { get; set; }
         public UserPreferences UserPreferences { get; set; }
     }
 }

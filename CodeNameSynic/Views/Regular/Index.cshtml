@@ -14,16 +14,20 @@
     </div>
     @* dropdown goes here for list of categories *@
 </div>
+<br />
+
 <div>
     @Html.TextBox("Search")
-    @Html.DropDownList("Categories")
+    @* @Html.DropDownList("Categories") *@
 </div>
+<br />
 
 <!-- Recommended Feed -->
 <div class="jumbotron">
-    <h3> Recommended Events </h3>
-    <div class="row">
-        <center>
+    <center>
+        <h2> Recommended Events </h2>
+        <hr />
+        <div class="row">
             <div class="col-md-4">
                 @Html.ActionLink("Event 1", "", "", new { @class = "btn btn-default" })
             </div>
@@ -33,8 +37,8 @@
             <div class="col-md-4">
                 @Html.ActionLink("Event 3", "", "", new { @class = "btn btn-default" })
             </div>
-        </center>
-    </div>
+        </div>
+    </center>
 </div>
 
 <br />

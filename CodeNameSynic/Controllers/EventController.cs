@@ -20,7 +20,7 @@ namespace CodeNameSynic.Controllers
         public ActionResult Details(int id)
         {
             Event eventFromDb = db.Events.Where(e => e.ID == id).FirstOrDefault();
-            return View(eventFromDb);
+            return View("Event", eventFromDb);
         }
 
         // GET: Event/Create

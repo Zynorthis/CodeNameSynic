@@ -193,6 +193,14 @@
     <Compile Include="Migrations\201901230002384_DbAddTableUserPref.Designer.cs">
       <DependentUpon>201901230002384_DbAddTableUserPref.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901232024073_DbUpdate.cs" />
+    <Compile Include="Migrations\201901232024073_DbUpdate.Designer.cs">
+      <DependentUpon>201901232024073_DbUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901232054040_UserForeignKeyNullable.cs" />
+    <Compile Include="Migrations\201901232054040_UserForeignKeyNullable.Designer.cs">
+      <DependentUpon>201901232054040_UserForeignKeyNullable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -221,6 +229,7 @@
     <Content Include="Views\Regular\Index.cshtml" />
     <Content Include="Views\Shared\Category.cshtml" />
     <Content Include="Views\Event\Event.cshtml" />
+    <Content Include="Views\Event\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -290,6 +299,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901230002384_DbAddTableUserPref.resx">
       <DependentUpon>201901230002384_DbAddTableUserPref.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901232024073_DbUpdate.resx">
+      <DependentUpon>201901232024073_DbUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901232054040_UserForeignKeyNullable.resx">
+      <DependentUpon>201901232054040_UserForeignKeyNullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
