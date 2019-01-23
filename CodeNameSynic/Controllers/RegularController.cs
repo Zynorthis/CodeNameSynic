@@ -7,10 +7,10 @@ using CodeNameSynic.Models;
 
 namespace CodeNameSynic.Controllers
 {
-    public class RegularController : Controller
+    public class RecommendedEventsController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
-        // GET: Regular
+        // GET: /RecommendedEvents/
         public ActionResult Index(SynicUser user)
         {
             //List<Event> recommendedEvents = new List<Event>();
@@ -26,10 +26,11 @@ namespace CodeNameSynic.Controllers
             return View();
         }
 
-        // GET: Regular/Details/5
+        // GET: /RecommendedEvents/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            Response.Write("<h1> Details RecommendedEventsID: " + id + "</h1>");
+            //return View();
         }
 
         // GET: Regular/Create
