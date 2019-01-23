@@ -33,5 +33,7 @@ namespace CodeNameSynic.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<CodeNameSynic.Models.UserPreferences> UserPreferences { get; set; }
     }
 }

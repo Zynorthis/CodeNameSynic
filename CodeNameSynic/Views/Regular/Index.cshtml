@@ -1,0 +1,24 @@
+﻿@model CodeNameSynic.Models.UserAndEventsModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2>Welcome @Model.User.FirstName @Model.User.LastName!</h2>
+
+<!-- Recommended Feed -->
+<h3> Recommended Events </h3>
+<div class="row">
+    <center>
+        <div class="col-md-4">
+            @Html.ActionLink("Event 1", "", "", new { @class = "btn btn-default" })
+        </div>
+        <div class="col-md-4">
+            @Html.ActionLink("Event 2", "", "", new { @class = "btn btn-default" })
+        </div>
+        <div class="col-md-4">
+            @Html.ActionLink("Event 3", "", "", new { @class = "btn btn-default" })
+        </div>
+    </center>
+</div>
+<h3> Categories </h3>

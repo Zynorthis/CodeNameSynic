@@ -18,5 +18,10 @@ namespace CodeNameSynic.Models
         [Display(Name = "User Id")]
         public string ApplicationUserRefId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
+
+        [ForeignKey("UserPreferences")]
+        [Display(Name = "Preferences")]
+        public int UserPreferencesRefId { get; set; }
+        public UserPreferences UserPreferences { get; set; }
     }
 }

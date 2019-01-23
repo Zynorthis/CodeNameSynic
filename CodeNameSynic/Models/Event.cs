@@ -18,6 +18,7 @@ namespace CodeNameSynic.Models
         public float Longitude { get; set; }
         public int StartTime { get; set; }
         public int EndTime { get; set; }
+        public double TotalRating { get; set; }
         [ForeignKey("Rating")]
         public int RatingRefId { get; set; }
         public Rating Rating { get; set; }
