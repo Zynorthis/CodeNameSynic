@@ -98,6 +98,16 @@ namespace CodeNameSynic.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult Category(string category)
+        {
+            Category selectedCategory = db.Categories.Where(c => c.Title == category).SingleOrDefault();
+            List<Event> EventList = db.Events.Where(e => e.CategoryRefId == selectedCategory.ID).ToList();
+            ViewBag.EventList = new SelectList(EventList);
+
+            return View(selectedCategory);
+        }
+
         //private List<Event> eventQuery(int ID)
         //{
         //    var eventQuery = db.Events.Where(e => e.Category.ID == ID).ToList();
