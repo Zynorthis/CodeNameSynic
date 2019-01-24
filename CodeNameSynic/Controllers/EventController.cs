@@ -26,22 +26,39 @@ namespace CodeNameSynic.Controllers
         // GET: Event/Create
         public ActionResult Create()
         {
+            List<string> startTime = new List<string>() { "72 hours", "48 hours", "24 hours", "12 hours", "6 hours", "3 hours", "1 hour", "45 minutes", "30 minutes", "15 minutes", "10 minutes", "5 minutes" };
+            List<string> endTime = new List<string>() { "72 hours", "48 hours", "24 hours", "12 hours", "6 hours", "3 hours", "1 hour", "45 minutes", "30 minutes", "15 minutes", "10 minutes", "5 minutes" };
+            ViewBag.StartTime = new SelectList(startTime);
+            ViewBag.EndTime = new SelectList(endTime);
+            ViewBag.CategoryList = new SelectList(db.Categories.Select(c => c.Title).ToList());
             return View();
         }
 
         // POST: Event/Create
         [HttpPost]
-        public ActionResult Create(Event eventSubmittion)
+        public ActionResult Create(CategoryAndEventModel eventSubmittion)
         {
             try
             {
-                db.Events.Add(eventSubmittion);
+                Event eventModel = new Event();
+                eventModel = eventSubmittion.Event;
+                int categoryIdFromDb = db.Categories.Where(c => c.Title == eventSubmittion.Category.Title).Select(c => c.ID).SingleOrDefault();
+
+                eventModel.CategoryRefId = categoryIdFromDb;
+
+                db.Events.Add(eventModel);
                 db.SaveChanges();
 
-                return RedirectToAction("Details", eventSubmittion.ID);
+                return RedirectToAction("Details", eventModel.ID);
             }
             catch
             {
+                List<string> startTime = new List<string>() { "72 hours", "48 hours", "24 hours", "12 hours", "6 hours", "3 hours", "1 hour", "45 minutes", "30 minutes", "15 minutes", "10 minutes", "5 minutes" };
+                List<string> endTime = new List<string>() { "72 hours", "48 hours", "24 hours", "12 hours", "6 hours", "3 hours", "1 hour", "45 minutes", "30 minutes", "15 minutes", "10 minutes", "5 minutes" };
+                ViewBag.StartTime = new SelectList(startTime);
+                ViewBag.EndTime = new SelectList(endTime);
+                ViewBag.CategoryList = new SelectList(db.Categories.Select(c => c.Title).ToList());
+
                 return View();
             }
         }

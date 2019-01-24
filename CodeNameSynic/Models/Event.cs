@@ -26,7 +26,7 @@ namespace CodeNameSynic.Models
         public int UserRefId { get; set; }
         public SynicUser User { get; set; }
         [ForeignKey("Category")]
-        public int CategoryRefId { get; set; }
+        public int? CategoryRefId { get; set; }
         public Category Category { get; set; }
     }
 }
