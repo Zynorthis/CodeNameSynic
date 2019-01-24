@@ -168,6 +168,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\API.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\BundleConfig2.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -185,21 +186,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201901221753550_Init.cs" />
-    <Compile Include="Migrations\201901221753550_Init.Designer.cs">
-      <DependentUpon>201901221753550_Init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901230002384_DbAddTableUserPref.cs" />
-    <Compile Include="Migrations\201901230002384_DbAddTableUserPref.Designer.cs">
-      <DependentUpon>201901230002384_DbAddTableUserPref.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901232024073_DbUpdate.cs" />
-    <Compile Include="Migrations\201901232024073_DbUpdate.Designer.cs">
-      <DependentUpon>201901232024073_DbUpdate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901232054040_UserForeignKeyNullable.cs" />
-    <Compile Include="Migrations\201901232054040_UserForeignKeyNullable.Designer.cs">
-      <DependentUpon>201901232054040_UserForeignKeyNullable.cs</DependentUpon>
+    <Compile Include="Migrations\201901242050405_init.cs" />
+    <Compile Include="Migrations\201901242050405_init.Designer.cs">
+      <DependentUpon>201901242050405_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -295,17 +284,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201901221753550_Init.resx">
-      <DependentUpon>201901221753550_Init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901230002384_DbAddTableUserPref.resx">
-      <DependentUpon>201901230002384_DbAddTableUserPref.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901232024073_DbUpdate.resx">
-      <DependentUpon>201901232024073_DbUpdate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901232054040_UserForeignKeyNullable.resx">
-      <DependentUpon>201901232054040_UserForeignKeyNullable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901242050405_init.resx">
+      <DependentUpon>201901242050405_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

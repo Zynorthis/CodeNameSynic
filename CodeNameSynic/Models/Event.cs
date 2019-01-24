@@ -19,12 +19,11 @@ namespace CodeNameSynic.Models
         public int StartTime { get; set; }
         public int EndTime { get; set; }
         public double TotalRating { get; set; }
-        [ForeignKey("Rating")]
-        public int RatingRefId { get; set; }
-        public Rating Rating { get; set; }
+
         [ForeignKey("User")]
-        public int UserRefId { get; set; }
+        public int? UserRefId { get; set; }
         public SynicUser User { get; set; }
+
         [ForeignKey("Category")]
         public int? CategoryRefId { get; set; }
         public Category Category { get; set; }

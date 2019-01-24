@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CodeNameSynic.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 
 namespace CodeNameSynic.Controllers
 {
@@ -40,11 +43,15 @@ namespace CodeNameSynic.Controllers
         {
             try
             {
+                var userID = User.Identity.GetUserId();
+                SynicUser user = db.SynicUsers.Where(u => u.ApplicationUserRefId == userID).SingleOrDefault();
+
                 Event eventModel = new Event();
                 eventModel = eventSubmittion.Event;
                 int categoryIdFromDb = db.Categories.Where(c => c.Title == eventSubmittion.Category.Title).Select(c => c.ID).SingleOrDefault();
 
                 eventModel.CategoryRefId = categoryIdFromDb;
+                eventModel.UserRefId = user.ID;
 
                 db.Events.Add(eventModel);
                 db.SaveChanges();
@@ -59,7 +66,7 @@ namespace CodeNameSynic.Controllers
                 ViewBag.EndTime = new SelectList(endTime);
                 ViewBag.CategoryList = new SelectList(db.Categories.Select(c => c.Title).ToList());
 
-                return View();
+                return View(eventSubmittion);
             }
         }
 
