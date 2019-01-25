@@ -12,7 +12,9 @@ namespace CodeNameSynic.Controllers
 {
     public class EventController : Controller
     {
-        ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
+        private List<string> startTime = new List<string>() { "72 hours", "48 hours", "24 hours", "12 hours", "6 hours", "3 hours", "1 hour", "45 minutes", "30 minutes", "15 minutes", "10 minutes", "5 minutes" };
+        private List<string> endTime = new List<string>() { "72 hours", "48 hours", "24 hours", "12 hours", "6 hours", "3 hours", "1 hour", "45 minutes", "30 minutes", "15 minutes", "10 minutes", "5 minutes" };
         // GET: Event
         public ActionResult Index()
         {
@@ -25,14 +27,15 @@ namespace CodeNameSynic.Controllers
             Event eventFromDb = db.Events.Where(e => e.ID == id).FirstOrDefault();
             SynicUser userFromDb = db.SynicUsers.Where(u => u.ID == eventFromDb.UserRefId).SingleOrDefault();
             eventFromDb.User = userFromDb;
+
+            eventFromDb.TotalRating = RatingCalculation(eventFromDb.ID);
+
             return View("Event", eventFromDb);
         }
 
         // GET: Event/Create
         public ActionResult Create()
         {
-            List<string> startTime = new List<string>() { "72 hours", "48 hours", "24 hours", "12 hours", "6 hours", "3 hours", "1 hour", "45 minutes", "30 minutes", "15 minutes", "10 minutes", "5 minutes" };
-            List<string> endTime = new List<string>() { "72 hours", "48 hours", "24 hours", "12 hours", "6 hours", "3 hours", "1 hour", "45 minutes", "30 minutes", "15 minutes", "10 minutes", "5 minutes" };
             ViewBag.StartTime = new SelectList(startTime);
             ViewBag.EndTime = new SelectList(endTime);
             ViewBag.CategoryList = new SelectList(db.Categories.Select(c => c.Title).ToList());
@@ -58,20 +61,10 @@ namespace CodeNameSynic.Controllers
                 db.Events.Add(eventModel);
                 db.SaveChanges();
 
-                //eventModel = db.Events.Where(
-                //    e => e.UserRefId == eventSubmittion.Event.UserRefId &&
-                //    e.Title == eventSubmittion.Event.Title &&
-                //    e.Address == eventSubmittion.Event.Address)
-                //    .SingleOrDefault();
-
-                //int? id = eventModel.ID;
-
                 return RedirectToAction("Details", new { id = eventModel.ID });
             }
             catch
             {
-                List<string> startTime = new List<string>() { "72 hours", "48 hours", "24 hours", "12 hours", "6 hours", "3 hours", "1 hour", "45 minutes", "30 minutes", "15 minutes", "10 minutes", "5 minutes" };
-                List<string> endTime = new List<string>() { "72 hours", "48 hours", "24 hours", "12 hours", "6 hours", "3 hours", "1 hour", "45 minutes", "30 minutes", "15 minutes", "10 minutes", "5 minutes" };
                 ViewBag.StartTime = new SelectList(startTime);
                 ViewBag.EndTime = new SelectList(endTime);
                 ViewBag.CategoryList = new SelectList(db.Categories.Select(c => c.Title).ToList());
@@ -89,7 +82,7 @@ namespace CodeNameSynic.Controllers
 
         // POST: Event/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, Event eventSubmittion)
+        public ActionResult Edit(int? id, Event eventSubmittion)
         {
             try
             {
@@ -114,7 +107,7 @@ namespace CodeNameSynic.Controllers
         }
 
         // GET: Event/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
             Event eventFromDb = db.Events.Where(e => e.ID == id).FirstOrDefault();
             return View(eventFromDb);
@@ -122,7 +115,7 @@ namespace CodeNameSynic.Controllers
 
         // POST: Event/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int? id, FormCollection collection)
         {
             try
             {
@@ -137,6 +130,17 @@ namespace CodeNameSynic.Controllers
                 Event eventFromDb = db.Events.Where(e => e.ID == id).FirstOrDefault();
                 return View(eventFromDb);
             }
+        }
+
+        private double RatingCalculation(int id)
+        {
+            var ratingsFromDb = db.Ratings.Where(r => r.Event.ID == id).ToList();
+            double total = 0;
+            foreach(var rating in ratingsFromDb)
+            {
+                total += rating.RatingNumber;
+            }
+            return total;
         }
     }
 }

@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CodeNameSynic.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 
 namespace CodeNameSynic.Controllers
 {
@@ -11,22 +14,24 @@ namespace CodeNameSynic.Controllers
     {
         ApplicationDbContext db = new ApplicationDbContext();
         // GET: Regular
-        public ActionResult Index(SynicUser user)
+        public ActionResult Index()
         {
-            //List<Event> recommendedEvents = new List<Event>();
-            //foreach(var category in user.UserPreferences.FollowedCategories)
-            //{
-            //    List<Event> popularEvents = eventQuery(category.ID);
-            //    foreach(var item in popularEvents)
-            //    {
-            //        recommendedEvents.Add(item);
-            //    }
-            //}
-            //return View(recommendedEvents);
-
             UserAndEventsModel model = new UserAndEventsModel();
-            model.User = user;
-            return View(model);
+
+            ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            model.User = db.SynicUsers.Where(u => u.ApplicationUserRefId == user.Id).SingleOrDefault();
+            try
+            {
+                foreach (var category in model.User.UserPreferences.FollowedCategories)
+                {
+                    model.Events = db.Events.Where(e => e.Category.ID == category.ID).ToList();
+                }
+                return View(model);
+            }
+            catch
+            {
+                return View(model);
+            }
         }
 
         // GET: Regular/Details/5
