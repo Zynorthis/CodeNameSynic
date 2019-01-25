@@ -11,6 +11,7 @@ namespace CodeNameSynic.Models
     {
         [Key]
         public int ID { get; set; }
+        [Display(Name = "Rating Number")]
         public int RatingNumber { get; set; }
         public string Description { get; set; }
 

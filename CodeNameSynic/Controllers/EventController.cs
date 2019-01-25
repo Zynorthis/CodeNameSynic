@@ -20,9 +20,11 @@ namespace CodeNameSynic.Controllers
         }
 
         // GET: Event/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
             Event eventFromDb = db.Events.Where(e => e.ID == id).FirstOrDefault();
+            SynicUser userFromDb = db.SynicUsers.Where(u => u.ID == eventFromDb.UserRefId).SingleOrDefault();
+            eventFromDb.User = userFromDb;
             return View("Event", eventFromDb);
         }
 
@@ -56,7 +58,15 @@ namespace CodeNameSynic.Controllers
                 db.Events.Add(eventModel);
                 db.SaveChanges();
 
-                return RedirectToAction("Details", eventModel.ID);
+                //eventModel = db.Events.Where(
+                //    e => e.UserRefId == eventSubmittion.Event.UserRefId &&
+                //    e.Title == eventSubmittion.Event.Title &&
+                //    e.Address == eventSubmittion.Event.Address)
+                //    .SingleOrDefault();
+
+                //int? id = eventModel.ID;
+
+                return RedirectToAction("Details", new { id = eventModel.ID });
             }
             catch
             {
@@ -71,10 +81,10 @@ namespace CodeNameSynic.Controllers
         }
 
         // GET: Event/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
             Event eventFromDb = db.Events.Where(e => e.ID == id).FirstOrDefault();
-            return View(eventFromDb);
+            return View( eventFromDb);
         }
 
         // POST: Event/Edit/5

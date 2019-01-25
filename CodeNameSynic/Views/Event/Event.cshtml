@@ -7,7 +7,7 @@
     <!-- Map styling -->
     <style>
          /* Always set the map height explicitly to define the size of the div
-        * element that contains the map. */
+          * element that contains the map. */
          #map {
              height: 100%;
          }
@@ -21,13 +21,15 @@
 </div>
 
 <center>
+    <hr />
     <div class="jumbotron">
         <h2> @Model.Title </h2>
         <hr />
         <h4> @Model.Description </h4>
         <br />
-        <div class="right">
+        <div>
             <h4>
+                Overall Rating: 
                 @Model.TotalRating |
                 @Html.ActionLink("See Reviews Here", "Review", "Review", "", new { @class = "btn btn-default" })
             </h4>
@@ -84,7 +86,7 @@
         });
       }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=" + @CodeNameSynic.API.API.Key + "&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=" + "@CodeNameSynic.API.API.Key" + "&callback=initMap" async defer></script>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |

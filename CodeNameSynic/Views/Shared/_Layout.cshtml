@@ -21,9 +21,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Consumer Home", "Index", "Regular")</li>
+                    <li>@Html.ActionLink("Moderator Home", "Index", "Moderator")</li>
+                    <li>@Html.ActionLink("Create Event", "Create", "Event")</li>
+                    <li>@Html.ActionLink("Details Example", "Event", "Event")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -33,7 +34,9 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year | Jacob Taylor & Meg </p>
+            <center>
+                <p>&copy; @DateTime.Now.Year | Jacob & Meg Collaboration | Synic</p>
+            </center>
         </footer>
     </div>
 

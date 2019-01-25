@@ -16,8 +16,11 @@ namespace CodeNameSynic.Models
         public string Address { get; set; }
         public float Latitude { get; set; }
         public float Longitude { get; set; }
+        [Display(Name = "Start Time")]
         public int StartTime { get; set; }
+        [Display(Name = "End Time")]
         public int EndTime { get; set; }
+        [Display(Name = "Total Rating")]
         public double TotalRating { get; set; }
 
         [ForeignKey("User")]
