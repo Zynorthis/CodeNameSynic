@@ -10,7 +10,7 @@
           * element that contains the map. */
         #map {
             height: 100%;
-            width:100%;
+            
         }
         /* Optional: Makes the sample page fill the window. */
         html, body {
@@ -82,15 +82,17 @@
         <input id="submit" type="button" value="Geocode">
     </div>
     <br />
-    <div id="map"></div>
+    <center>
+        <div id="map"></div>
+    </center> 
 
     <script>
         // Initialize of the map
-        function initMap() {
+        @*function initMap() {
             try {
                 var obj = @Html.Raw(Json.Encode(Model));
                 const Http = new XMLHttpRequest();
-                const url = 'https://maps.googleapis.com/maps/api/geocode/json?key=' +@API.key+'&address=';
+                const url = @API.APILinkGeocoder;
                 Http.open("GET", url, false);
                 Http.send();
 
@@ -106,6 +108,33 @@
             catch{
                 console.log("Error.");
             }
+        }*@
+
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 8,
+                center: { lat: -34.397, lng: 150.644 }
+            });
+            var geocoder = new google.maps.Geocoder();
+
+            document.getElementById('submit').addEventListener('click', function () {
+                geocodeAddress(geocoder, map);
+            });
+        }
+
+        function geocodeAddress(geocoder, resultsMap) {
+            var address = document.getElementById('address').value;
+            geocoder.geocode({ 'address': address }, function (results, status) {
+                if (status === 'OK') {
+                    resultsMap.setCenter(results[0].geometry.location);
+                    var marker = new google.maps.Marker({
+                        map: resultsMap,
+                        position: results[0].geometry.location
+                    });
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
         }
         </script>
 
