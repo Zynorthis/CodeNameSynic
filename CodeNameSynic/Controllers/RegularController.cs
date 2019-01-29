@@ -29,7 +29,7 @@ namespace CodeNameSynic.Controllers
         // GET: /RecommendedEvents/Details/5
         public ActionResult Details(int id)
         {
-            Response.Write("<h1> Details RecommendedEventsID: " + id + "</h1>");
+            //Response.Write("<h1> Details RecommendedEventsID: " + id + "</h1>");
             //return View();
         }
 

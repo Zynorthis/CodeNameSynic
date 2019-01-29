@@ -183,14 +183,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201901221753550_Init.cs" />
-    <Compile Include="Migrations\201901221753550_Init.Designer.cs">
-      <DependentUpon>201901221753550_Init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901230002384_DbAddTableUserPref.cs" />
-    <Compile Include="Migrations\201901230002384_DbAddTableUserPref.Designer.cs">
-      <DependentUpon>201901230002384_DbAddTableUserPref.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -278,14 +270,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201901221753550_Init.resx">
-      <DependentUpon>201901221753550_Init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901230002384_DbAddTableUserPref.resx">
-      <DependentUpon>201901230002384_DbAddTableUserPref.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
