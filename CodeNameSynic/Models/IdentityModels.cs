@@ -24,6 +24,7 @@ namespace CodeNameSynic.Models
         public DbSet<Event> Events { get; set; }
         public DbSet<SynicUser> SynicUsers { get; set; }
         public DbSet<Rating> Ratings { get; set; }
+        public DbSet<PreferencesCategoryJunction> PreferencesCategoriesJunction { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
@@ -33,7 +34,5 @@ namespace CodeNameSynic.Models
         {
             return new ApplicationDbContext();
         }
-
-        public System.Data.Entity.DbSet<CodeNameSynic.Models.UserPreferences> UserPreferences { get; set; }
     }
 }

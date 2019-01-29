@@ -25,10 +25,12 @@ namespace CodeNameSynic.Controllers
             model.User = db.SynicUsers.Where(u => u.ApplicationUserRefId == user.Id).SingleOrDefault();
             try
             {
-                foreach (var category in model.User.UserPreferences.FollowedCategories)
-                {
-                    model.Events = db.Events.Where(e => e.Category.ID == category.ID).ToList();
-                }
+                //foreach (var category in model.User.UserPreferences.FollowedCategories)
+                //{
+                //    model.Events = db.Events.Where(e => e.Category.ID == category.ID).ToList();
+                //}
+
+                List<Category> followedCategories;
                 ViewBag.TimeDropDown = new SelectList(startTime);
                 ViewBag.CategoryDropDown = new SelectList(db.Categories.Select(c => c.Title).ToList());
                 return View(model);

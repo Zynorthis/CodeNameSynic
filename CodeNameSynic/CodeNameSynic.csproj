@@ -186,9 +186,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201901271449582_HomeInit.cs" />
-    <Compile Include="Migrations\201901271449582_HomeInit.Designer.cs">
-      <DependentUpon>201901271449582_HomeInit.cs</DependentUpon>
+    <Compile Include="Migrations\201901292050403_Init.cs" />
+    <Compile Include="Migrations\201901292050403_Init.Designer.cs">
+      <DependentUpon>201901292050403_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -197,6 +197,7 @@
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PreferencesCategoryJunction.cs" />
     <Compile Include="Models\Rating.cs" />
     <Compile Include="Models\SynicUser.cs" />
     <Compile Include="Models\UserAndEventsModel.cs" />
@@ -286,8 +287,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201901271449582_HomeInit.resx">
-      <DependentUpon>201901271449582_HomeInit.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901292050403_Init.resx">
+      <DependentUpon>201901292050403_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
