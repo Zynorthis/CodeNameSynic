@@ -10,14 +10,16 @@ using Microsoft.Owin.Security;
 
 namespace CodeNameSynic.Controllers
 {
-    public class RegularController : Controller
+    public class RecommendedEventsController : Controller
     {
+
         private ApplicationDbContext db = new ApplicationDbContext();
         private List<string> startTime = new List<string>() { "72 hours", "48 hours", "24 hours", "12 hours", "6 hours", "3 hours", "1 hour", "45 minutes", "30 minutes", "15 minutes", "10 minutes", "5 minutes" };
         private List<string> endTime = new List<string>() { "72 hours", "48 hours", "24 hours", "12 hours", "6 hours", "3 hours", "1 hour", "45 minutes", "30 minutes", "15 minutes", "10 minutes", "5 minutes" };
 
         // GET: Regular
         public ActionResult Index()
+
         {
             UserAndEventsModel model = new UserAndEventsModel();
 
@@ -41,9 +43,10 @@ namespace CodeNameSynic.Controllers
             }
         }
 
-        // GET: Regular/Details/5
+        // GET: /RecommendedEvents/Details/5
         public ActionResult Details(int id)
         {
+            //Response.Write("<h1> Details RecommendedEventsID: " + id + "</h1>");
             return View();
         }
 
