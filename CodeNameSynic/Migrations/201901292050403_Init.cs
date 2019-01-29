@@ -3,7 +3,7 @@ namespace CodeNameSynic.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class HomeInit : DbMigration
+    public partial class Init : DbMigration
     {
         public override void Up()
         {
@@ -14,11 +14,8 @@ namespace CodeNameSynic.Migrations
                         ID = c.Int(nullable: false, identity: true),
                         Title = c.String(),
                         Description = c.String(),
-                        UserPreferences_ID = c.Int(),
                     })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.UserPreferences", t => t.UserPreferences_ID)
-                .Index(t => t.UserPreferences_ID);
+                .PrimaryKey(t => t.ID);
             
             CreateTable(
                 "dbo.Events",
@@ -127,6 +124,19 @@ namespace CodeNameSynic.Migrations
                 .PrimaryKey(t => t.ID);
             
             CreateTable(
+                "dbo.PreferencesCategoryJunctions",
+                c => new
+                    {
+                        UserPreferenceRefId = c.Int(nullable: false),
+                        CategoryRefId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.UserPreferenceRefId, t.CategoryRefId })
+                .ForeignKey("dbo.Categories", t => t.CategoryRefId, cascadeDelete: true)
+                .ForeignKey("dbo.UserPreferences", t => t.UserPreferenceRefId, cascadeDelete: true)
+                .Index(t => t.UserPreferenceRefId)
+                .Index(t => t.CategoryRefId);
+            
+            CreateTable(
                 "dbo.Ratings",
                 c => new
                     {
@@ -159,9 +169,10 @@ namespace CodeNameSynic.Migrations
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.Ratings", "SynicUserRefId", "dbo.SynicUsers");
             DropForeignKey("dbo.Ratings", "EventRefId", "dbo.Events");
+            DropForeignKey("dbo.PreferencesCategoryJunctions", "UserPreferenceRefId", "dbo.UserPreferences");
+            DropForeignKey("dbo.PreferencesCategoryJunctions", "CategoryRefId", "dbo.Categories");
             DropForeignKey("dbo.Events", "UserRefId", "dbo.SynicUsers");
             DropForeignKey("dbo.SynicUsers", "UserPreferencesRefId", "dbo.UserPreferences");
-            DropForeignKey("dbo.Categories", "UserPreferences_ID", "dbo.UserPreferences");
             DropForeignKey("dbo.SynicUsers", "ApplicationUserRefId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
@@ -170,6 +181,8 @@ namespace CodeNameSynic.Migrations
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Ratings", new[] { "SynicUserRefId" });
             DropIndex("dbo.Ratings", new[] { "EventRefId" });
+            DropIndex("dbo.PreferencesCategoryJunctions", new[] { "CategoryRefId" });
+            DropIndex("dbo.PreferencesCategoryJunctions", new[] { "UserPreferenceRefId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
@@ -179,9 +192,9 @@ namespace CodeNameSynic.Migrations
             DropIndex("dbo.SynicUsers", new[] { "ApplicationUserRefId" });
             DropIndex("dbo.Events", new[] { "CategoryRefId" });
             DropIndex("dbo.Events", new[] { "UserRefId" });
-            DropIndex("dbo.Categories", new[] { "UserPreferences_ID" });
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Ratings");
+            DropTable("dbo.PreferencesCategoryJunctions");
             DropTable("dbo.UserPreferences");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");

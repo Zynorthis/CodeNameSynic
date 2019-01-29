@@ -13,10 +13,6 @@ namespace CodeNameSynic.Controllers
     public class RecommendedEventsController : Controller
     {
 
-        ApplicationDbContext db = new ApplicationDbContext();
-        // GET: /RecommendedEvents/
-        public ActionResult Index(SynicUser user);
-
         private ApplicationDbContext db = new ApplicationDbContext();
         private List<string> startTime = new List<string>() { "72 hours", "48 hours", "24 hours", "12 hours", "6 hours", "3 hours", "1 hour", "45 minutes", "30 minutes", "15 minutes", "10 minutes", "5 minutes" };
         private List<string> endTime = new List<string>() { "72 hours", "48 hours", "24 hours", "12 hours", "6 hours", "3 hours", "1 hour", "45 minutes", "30 minutes", "15 minutes", "10 minutes", "5 minutes" };
@@ -31,10 +27,12 @@ namespace CodeNameSynic.Controllers
             model.User = db.SynicUsers.Where(u => u.ApplicationUserRefId == user.Id).SingleOrDefault();
             try
             {
-                foreach (var category in model.User.UserPreferences.FollowedCategories)
-                {
-                    model.Events = db.Events.Where(e => e.Category.ID == category.ID).ToList();
-                }
+                //foreach (var category in model.User.UserPreferences.FollowedCategories)
+                //{
+                //    model.Events = db.Events.Where(e => e.Category.ID == category.ID).ToList();
+                //}
+
+                List<Category> followedCategories;
                 ViewBag.TimeDropDown = new SelectList(startTime);
                 ViewBag.CategoryDropDown = new SelectList(db.Categories.Select(c => c.Title).ToList());
                 return View(model);

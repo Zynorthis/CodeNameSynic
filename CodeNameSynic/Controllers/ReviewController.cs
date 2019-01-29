@@ -45,6 +45,8 @@ namespace CodeNameSynic.Controllers
                 db.Ratings.Add(review);
                 db.SaveChanges();
 
+                
+
                 return RedirectToAction("Details", new { id = review.ID });
             }
             catch
