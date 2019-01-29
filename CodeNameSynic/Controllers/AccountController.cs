@@ -141,7 +141,7 @@ namespace CodeNameSynic.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            ViewBag.Roles = new SelectList(db.Roles.ToList());
+            ViewBag.Roles = new SelectList(db.Roles.ToList(), "Name", "Name");
             return View();
         }
 
@@ -156,17 +156,17 @@ namespace CodeNameSynic.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
-                //Microsoft.AspNet.Identity.user
-                SynicUser userTableData = new SynicUser();
-                userTableData.FirstName = model.FirstName;
-                userTableData.LastName = model.LastName;
-                userTableData.ApplicationUserRefId = user.Id;
-                
-                db.SynicUsers.Add(userTableData);
-                db.SaveChanges();
-                
+
                 if (result.Succeeded)
                 {
+                    SynicUser userTableData = new SynicUser();
+                    userTableData.FirstName = model.FirstName;
+                    userTableData.LastName = model.LastName;
+                    userTableData.ApplicationUserRefId = user.Id;
+
+                    db.SynicUsers.Add(userTableData);
+                    db.SaveChanges();
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -176,9 +176,9 @@ namespace CodeNameSynic.Controllers
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
                     await this.UserManager.AddToRoleAsync(user.Id, model.Role);
                     
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Regular", userTableData);
                 }
-                ViewBag.Roles = new SelectList(db.Roles.ToList());
+                ViewBag.Roles = new SelectList(db.Roles.ToList(), "Name", "Name");
                 AddErrors(result);
             }
 

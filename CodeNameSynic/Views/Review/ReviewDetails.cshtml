@@ -1,0 +1,51 @@
+﻿@model CodeNameSynic.Models.Rating
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Review Details</h2>
+ 
+<div>
+    <h4>Rating</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Event.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Event.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("User")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SynicUser.FirstName)
+            @Html.DisplayFor(model => model.SynicUser.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RatingNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RatingNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to Event", "Details", "Event", new { id = Model.EventRefId }, null)
+</p>

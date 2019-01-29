@@ -6,19 +6,111 @@
 
 <h2>Welcome @Model.User.FirstName @Model.User.LastName!</h2>
 
+<!-- Search for an event -->
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-inline">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search" id="eventSearch" />
+        </div>
+        <div class="form-group">
+            @*<div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Dropdown
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                    </ul>
+                </div>*@
+            @Html.DropDownList("Dropdown", (SelectList)ViewBag.TimeDropDown, new { @class = "" })
+        </div>
+        <div class="form-group">
+            @Html.DropDownList("Dropdown", (SelectList)ViewBag.CategoryDropDown, new { @class = "" })
+        </div>
+        <div class="form-group">
+            <button class="btn btn-default" type="submit">Submit</button>
+        </div>
+    </div>
+}
+<br />
+
+<div class="form-inline">
+    @Html.TextBox("Search", null, new { @class = "form-group", @placeholder = "Search", @id = "eventSearch" })
+    @* @Html.DropDownList("Categories") *@
+</div>
+<br />
+
 <!-- Recommended Feed -->
-<h3> Recommended Events </h3>
-<div class="row">
+<div class="jumbotron">
     <center>
-        <div class="col-md-4">
-            @Html.ActionLink("Event 1", "", "", new { @class = "btn btn-default" })
-        </div>
-        <div class="col-md-4">
-            @Html.ActionLink("Event 2", "", "", new { @class = "btn btn-default" })
-        </div>
-        <div class="col-md-4">
-            @Html.ActionLink("Event 3", "", "", new { @class = "btn btn-default" })
+        <h2> Recommended Events </h2>
+        <hr />
+        <div class="row">
+            <div class="col-sm-4">
+                @Html.ActionLink("Event 1", "", "", new { @class = "btn btn-default" })
+            </div>
+            <div class="col-sm-4">
+                @Html.ActionLink("Event 2", "", "", new { @class = "btn btn-default" })
+            </div>
+            <div class="col-sm-4">
+                @Html.ActionLink("Event 3", "", "", new { @class = "btn btn-default" })
+            </div>
         </div>
     </center>
 </div>
-<h3> Categories </h3>
+
+<br />
+
+<!-- List of all Categories with links to their respective page -->
+<center>
+    <h3> Categories </h3>
+</center>
+<div class="row">
+    <div class="col-sm-3">
+        @Html.ActionLink("Music", "Category", "Regular", "Music", new { @class = "btn btn-default" })
+    </div>
+    <div class="col-sm-3">
+        @Html.ActionLink("Gaming", "Category", "Regular", "Gaming", new { @class = "btn btn-default" })
+    </div>
+    <div class="col-sm-3">
+        @Html.ActionLink("Fitness", "Category", "Regular", "Fitness", new { @class = "btn btn-default" })
+    </div>
+    <div class="col-sm-3">
+        @Html.ActionLink("Food", "Category", "Regular", "Food", new { @class = "btn btn-default" })
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-3">
+        @Html.ActionLink("Placeholder 1", "Category", "Regular", "Placeholder 1", new { @class = "btn btn-default" })
+    </div>
+    <div class="col-sm-3">
+        @Html.ActionLink("Placeholder 2", "Category", "Regular", "Placeholder 2", new { @class = "btn btn-default" })
+    </div>
+    <div class="col-sm-3">
+        @Html.ActionLink("Placeholder 3", "Category", "Regular", "Placeholder 3", new { @class = "btn btn-default" })
+    </div>
+    <div class="col-sm-3">
+        @Html.ActionLink("Placeholder 4", "Category", "Regular", "Placeholder 4", new { @class = "btn btn-default" })
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-3">
+        @Html.ActionLink("Placeholder 5", "Category", "Regular", "Placeholder 5", new { @class = "btn btn-default" })
+    </div>
+    <div class="col-sm-3">
+        @Html.ActionLink("Placeholder 6", "Category", "Regular", "Placeholder 6", new { @class = "btn btn-default" })
+    </div>
+    <div class="col-sm-3">
+        @Html.ActionLink("Placeholder 7", "Category", "Regular", "Placeholder 7", new { @class = "btn btn-default" })
+    </div>
+    <div class="col-sm-3">
+        @Html.ActionLink("Placeholder 8", "Category", "Regular", "Placeholder 8", new { @class = "btn btn-default" })
+    </div>
+</div>

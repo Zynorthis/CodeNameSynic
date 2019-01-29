@@ -4,26 +4,45 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CodeNameSynic.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 
 namespace CodeNameSynic.Controllers
 {
     public class RecommendedEventsController : Controller
     {
+<<<<<<< HEAD
         ApplicationDbContext db = new ApplicationDbContext();
         // GET: /RecommendedEvents/
         public ActionResult Index(SynicUser user)
+=======
+        private ApplicationDbContext db = new ApplicationDbContext();
+        private List<string> startTime = new List<string>() { "72 hours", "48 hours", "24 hours", "12 hours", "6 hours", "3 hours", "1 hour", "45 minutes", "30 minutes", "15 minutes", "10 minutes", "5 minutes" };
+        private List<string> endTime = new List<string>() { "72 hours", "48 hours", "24 hours", "12 hours", "6 hours", "3 hours", "1 hour", "45 minutes", "30 minutes", "15 minutes", "10 minutes", "5 minutes" };
+
+        // GET: Regular
+        public ActionResult Index()
+>>>>>>> 8a76406250ef4f21c275100402e1e8c0e27539cf
         {
-            //List<Event> recommendedEvents = new List<Event>();
-            //foreach(var category in user.UserPreferences.FollowedCategories)
-            //{
-            //    List<Event> popularEvents = eventQuery(category.ID);
-            //    foreach(var item in popularEvents)
-            //    {
-            //        recommendedEvents.Add(item);
-            //    }
-            //}
-            //return View(recommendedEvents);
-            return View();
+            UserAndEventsModel model = new UserAndEventsModel();
+
+            ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            model.User = db.SynicUsers.Where(u => u.ApplicationUserRefId == user.Id).SingleOrDefault();
+            try
+            {
+                foreach (var category in model.User.UserPreferences.FollowedCategories)
+                {
+                    model.Events = db.Events.Where(e => e.Category.ID == category.ID).ToList();
+                }
+                ViewBag.TimeDropDown = new SelectList(startTime);
+                ViewBag.CategoryDropDown = new SelectList(db.Categories.Select(c => c.Title).ToList());
+                return View(model);
+            }
+            catch
+            {
+                return View(model);
+            }
         }
 
         // GET: /RecommendedEvents/Details/5
@@ -97,6 +116,15 @@ namespace CodeNameSynic.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult Category(string category)
+        {
+            Category selectedCategory = db.Categories.Where(c => c.Title == category).SingleOrDefault();
+            List<Event> EventList = db.Events.Where(e => e.CategoryRefId == selectedCategory.ID).ToList();
+            ViewBag.EventList = new SelectList(EventList);
+
+            return View(selectedCategory);
         }
 
         //private List<Event> eventQuery(int ID)

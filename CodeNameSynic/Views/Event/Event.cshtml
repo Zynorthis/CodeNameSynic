@@ -1,0 +1,150 @@
+﻿@model CodeNameSynic.Models.Event
+
+@{
+    ViewBag.Title = Model.Title;
+}
+<div>
+    <!-- Map styling -->
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+          * element that contains the map. */
+        #map {
+            height: 100%;
+            
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</div>
+
+<center>
+    <hr />
+    <div class="jumbotron">
+        <h2> @Model.Title </h2>
+        <hr />
+        <h4> @Model.Description </h4>
+        <br />
+        <div>
+            <h4>
+                Overall Rating:
+                @Model.TotalRating |
+                @Html.ActionLink("See Reviews Here", "Review", "Review", "", new { @class = "btn btn-default" })
+            </h4>
+        </div>
+    </div>
+</center>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayName("Event Host")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.FirstName)
+            @Html.DisplayFor(model => model.User.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndTime)
+        </dd>
+
+    </dl>
+
+    <!-- Display Map -->
+    <div id="floating-panel">
+        <input id="address" type="textbox" value="Milwaukee, WI">
+        <input id="submit" type="button" value="Geocode">
+    </div>
+    <br />
+    <center>
+        <div id="map"></div>
+    </center> 
+
+    <script>
+        // Initialize of the map
+        @*function initMap() {
+            try {
+                var obj = @Html.Raw(Json.Encode(Model));
+                const Http = new XMLHttpRequest();
+                const url = @API.APILinkGeocoder;
+                Http.open("GET", url, false);
+                Http.send();
+
+                // The location of Uluru
+                var uluru = { lat: 42.57387, lng: -87.892213 };
+                // The map, centered at Uluru
+                var map = new google.maps.Map(
+                    document.getElementById('map'), { zoom: 4, center: uluru });
+                // The marker, positioned at Uluru
+                var marker = new google.maps.Marker({ position: uluru, map: map });
+                console.log('map', map);
+            }
+            catch{
+                console.log("Error.");
+            }
+        }*@
+
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 8,
+                center: { lat: -34.397, lng: 150.644 }
+            });
+            var geocoder = new google.maps.Geocoder();
+
+            document.getElementById('submit').addEventListener('click', function () {
+                geocodeAddress(geocoder, map);
+            });
+        }
+
+        function geocodeAddress(geocoder, resultsMap) {
+            var address = document.getElementById('address').value;
+            geocoder.geocode({ 'address': address }, function (results, status) {
+                if (status === 'OK') {
+                    resultsMap.setCenter(results[0].geometry.location);
+                    var marker = new google.maps.Marker({
+                        map: resultsMap,
+                        position: results[0].geometry.location
+                    });
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+        </script>
+
+
+    <script async defer src="@API.APILinkGMap"></script>
+
+</div>
+<hr />
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
