@@ -12,8 +12,15 @@
     
 @if ((SelectList)ViewBag.EventList != null)
 {
+    // display table header data here
 
+    foreach(var item in ViewBag.EventList)
+    {
+        // List all event details here
+    }
 }
+
+    @* items being displayed can be put into this styling is wanted. *@
     <div class="row">
         <div class="col-md-4">
             

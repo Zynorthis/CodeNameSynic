@@ -77,7 +77,7 @@ namespace CodeNameSynic.Controllers
         public ActionResult Edit(int? id)
         {
             Event eventFromDb = db.Events.Where(e => e.ID == id).FirstOrDefault();
-            return View( eventFromDb);
+            return View(eventFromDb);
         }
 
         // POST: Event/Edit/5
@@ -97,7 +97,23 @@ namespace CodeNameSynic.Controllers
 
                 db.SaveChanges();
 
-                return RedirectToAction("Index");
+                ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+                var userRoleJunktion = user.Roles.Where(r => r.UserId == user.Id).SingleOrDefault();
+                var role = db.Roles.Where(r => r.Id == userRoleJunktion.RoleId).SingleOrDefault();
+                if (role.Name == "Regular")
+                {
+                    return RedirectToAction("Index", "Regular");
+                }
+                else if (role.Name == "Moderator")
+                {
+                    return RedirectToAction("Index", "Moderator");
+                }
+                else
+                {
+                    // Something went wrong here and the user was either not signed in or has no role assigned to them
+                    // either way, return them to the home page.
+                    return RedirectToAction("Index", "Home");
+                }
             }
             catch
             {
@@ -123,7 +139,23 @@ namespace CodeNameSynic.Controllers
                 db.Events.Remove(eventFromDb);
                 db.SaveChanges();
 
-                return RedirectToAction("Index");
+                ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+                var userRoleJunktion = user.Roles.Where(r => r.UserId == user.Id).SingleOrDefault();
+                var role = db.Roles.Where(r => r.Id == userRoleJunktion.RoleId).SingleOrDefault();
+                if (role.Name == "Regular")
+                {
+                    return RedirectToAction("Index", "Regular");
+                }
+                else if (role.Name == "Moderator")
+                {
+                    return RedirectToAction("Index", "Moderator");
+                }
+                else
+                {
+                    // Something went wrong here and the user was either not signed in or has no role assigned to them
+                    // either way, return them to the home page.
+                    return RedirectToAction("Index", "Home");
+                }
             }
             catch
             {

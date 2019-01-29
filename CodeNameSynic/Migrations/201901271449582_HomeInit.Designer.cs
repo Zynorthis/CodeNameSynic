@@ -7,13 +7,13 @@ namespace CodeNameSynic.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class init : IMigrationMetadata
+    public sealed partial class HomeInit : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(HomeInit));
         
         string IMigrationMetadata.Id
         {
-            get { return "201901242050405_init"; }
+            get { return "201901271449582_HomeInit"; }
         }
         
         string IMigrationMetadata.Source

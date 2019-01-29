@@ -12,7 +12,7 @@ namespace CodeNameSynic.Controllers
 {
     public class RegularController : Controller
     {
-        ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
         private List<string> startTime = new List<string>() { "72 hours", "48 hours", "24 hours", "12 hours", "6 hours", "3 hours", "1 hour", "45 minutes", "30 minutes", "15 minutes", "10 minutes", "5 minutes" };
         private List<string> endTime = new List<string>() { "72 hours", "48 hours", "24 hours", "12 hours", "6 hours", "3 hours", "1 hour", "45 minutes", "30 minutes", "15 minutes", "10 minutes", "5 minutes" };
 
