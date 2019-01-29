@@ -2,11 +2,12 @@
 
 @{
     ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <center>
     <div>
-        <h2> @Model.Title <h2>
+        <h2> @Model.Title </h2>
         <h4> @Model.Description </h4>
     </div>
     
@@ -17,6 +18,18 @@
     foreach(var item in ViewBag.EventList)
     {
         // List all event details here
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Events)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categories)
+            </td>
+            <td>
+                @Html.ActionLink("Events", "Details", new { id=item.EventsId}) |
+                @Html.ActionLink("Category","Details", new {id=item.CategoryId}) |
+            </td>
+        </tr>
     }
 }
 
