@@ -12,18 +12,18 @@ namespace CodeNameSynic.Controllers
 {
     public class RecommendedEventsController : Controller
     {
-<<<<<<< HEAD
+
         ApplicationDbContext db = new ApplicationDbContext();
         // GET: /RecommendedEvents/
-        public ActionResult Index(SynicUser user)
-=======
+        public ActionResult Index(SynicUser user);
+
         private ApplicationDbContext db = new ApplicationDbContext();
         private List<string> startTime = new List<string>() { "72 hours", "48 hours", "24 hours", "12 hours", "6 hours", "3 hours", "1 hour", "45 minutes", "30 minutes", "15 minutes", "10 minutes", "5 minutes" };
         private List<string> endTime = new List<string>() { "72 hours", "48 hours", "24 hours", "12 hours", "6 hours", "3 hours", "1 hour", "45 minutes", "30 minutes", "15 minutes", "10 minutes", "5 minutes" };
 
         // GET: Regular
         public ActionResult Index()
->>>>>>> 8a76406250ef4f21c275100402e1e8c0e27539cf
+
         {
             UserAndEventsModel model = new UserAndEventsModel();
 

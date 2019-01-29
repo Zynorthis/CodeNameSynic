@@ -329,9 +329,9 @@ ASALocalRun/
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
 
-<<<<<<< HEAD
-Web.config
-=======
+
+
+
 #Synic Project Ignore
 Web.config
 CodeNameSynic/API/*
