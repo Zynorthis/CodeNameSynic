@@ -74,10 +74,10 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Event Overview", "Details")
-            @Html.ActionLink("Edit Event", "Edit", new { id = Model.ID})
-        </div>
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        @Html.ActionLink("Event Overview", "Details", new { id = Model.ID }, new { @class = "btn btn-default" }) |
+        @Html.ActionLink("Edit Event", "Edit", new { id = Model.ID }, new { @class = "btn btn-default" })
+    </div>
     }
 </div>

@@ -7,7 +7,7 @@
 <h2>Welcome @Model.User.FirstName @Model.User.LastName!</h2>
 
 <!-- Search for an event -->
-@using (Html.BeginForm())
+@using (Html.BeginForm("SearchBar", "Regular"))
 {
     @Html.AntiForgeryToken()
 
@@ -16,23 +16,10 @@
             <input type="text" class="form-control" placeholder="Search" id="eventSearch" />
         </div>
         <div class="form-group">
-            @*<div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        Dropdown
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
-                </div>*@
-            @Html.DropDownList("Dropdown", (SelectList)ViewBag.TimeDropDown, new { @class = "" })
+            @Html.DropDownList("Dropdown", (SelectList)ViewBag.TimeDropDown, new { @class = "btn btn-default" })
         </div>
         <div class="form-group">
-            @Html.DropDownList("Dropdown", (SelectList)ViewBag.CategoryDropDown, new { @class = "" })
+            @Html.DropDownList("Dropdown", (SelectList)ViewBag.CategoryDropDown, new { @class = "btn btn-default" })
         </div>
         <div class="form-group">
             <button class="btn btn-default" type="submit">Submit</button>
@@ -41,11 +28,11 @@
 }
 <br />
 
-<div class="form-inline">
+@*<div class="form-inline">
     @Html.TextBox("Search", null, new { @class = "form-group", @placeholder = "Search", @id = "eventSearch" })
-    @* @Html.DropDownList("Categories") *@
+     @Html.DropDownList("Categories") 
 </div>
-<br />
+<br />*@
 
 <!-- Recommended Feed -->
 <div class="jumbotron">

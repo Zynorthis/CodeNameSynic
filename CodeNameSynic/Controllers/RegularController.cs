@@ -10,7 +10,7 @@ using Microsoft.Owin.Security;
 
 namespace CodeNameSynic.Controllers
 {
-    public class RecommendedEventsController : Controller
+    public class RegularController : Controller
     {
 
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -19,7 +19,6 @@ namespace CodeNameSynic.Controllers
 
         // GET: Regular
         public ActionResult Index()
-
         {
             UserAndEventsModel model = new UserAndEventsModel();
 
@@ -123,6 +122,12 @@ namespace CodeNameSynic.Controllers
             ViewBag.EventList = new SelectList(EventList);
 
             return View(selectedCategory);
+        }
+
+        public ActionResult SearchBar(FormCollection collection)
+        {
+
+            return View();
         }
 
         //private List<Event> eventQuery(int ID)

@@ -27,14 +27,25 @@ namespace CodeNameSynic.Controllers
         }
 
         // GET: Review/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            return View();
+            ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            SynicUser loggedInUser = db.SynicUsers.Where(u => u.ApplicationUserRefId == user.Id).SingleOrDefault();
+            Event eventFromDb = db.Events.Where(e => e.ID == id).SingleOrDefault();
+            if (eventFromDb.UserRefId != loggedInUser.ID)
+            {
+                return View(eventFromDb.ID);
+            }
+            else
+            {
+                // users should not be able to rate their own event
+                return View("Index", "Regular");
+            }
         }
 
         // POST: Review/Create
         [HttpPost]
-        public ActionResult Create(Rating review)
+        public ActionResult Create(Rating review, int? id)
         {
             try
             {
@@ -44,8 +55,6 @@ namespace CodeNameSynic.Controllers
                 review.SynicUser = userFromDb;
                 db.Ratings.Add(review);
                 db.SaveChanges();
-
-                
 
                 return RedirectToAction("Details", new { id = review.ID });
             }

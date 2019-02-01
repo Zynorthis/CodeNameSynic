@@ -220,6 +220,9 @@
     <Content Include="Views\Event\Remove.cshtml" />
     <Content Include="Views\Review\Create.cshtml" />
     <Content Include="Views\Review\ReviewDetails.cshtml" />
+    <Content Include="Views\Event\Edit.cshtml" />
+    <Content Include="Views\Review\Edit.cshtml" />
+    <Content Include="Views\Review\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

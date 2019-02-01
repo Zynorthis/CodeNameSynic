@@ -31,7 +31,8 @@
             <h4>
                 Overall Rating:
                 @Model.TotalRating |
-                @Html.ActionLink("See Reviews Here", "Review", "Review", "", new { @class = "btn btn-default" })
+                @Html.ActionLink("See Reviews Here", "List", "Review", null, new { @class = "btn btn-default" }) |
+                @Html.ActionLink("Review Event", "Create", "Review", new { id = Model.ID }, new { @class = "btn btn-default" })
             </h4>
         </div>
     </div>
@@ -143,5 +144,6 @@
 <hr />
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Delete", "Delete", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
